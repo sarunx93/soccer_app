@@ -22,8 +22,7 @@ export const getAllTeams = createAsyncThunk(
     try {
       const resp = await axios.get(url, {
         headers: {
-          "X-RapidAPI-Key":
-            "3652ad4cecmsh8226e1ee81ac706p1b542cjsn1e2e7a49b0a7",
+          "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
           "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
         },
       });
