@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.league-logo{
+  height:50px;
+}
+
+.team-logo-table{
+  height:30px;
+  margin-right: 0.5rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

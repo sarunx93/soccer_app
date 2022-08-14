@@ -3,22 +3,9 @@ import { Select, MenuItem, Typography } from "@mui/material";
 import { handleLeagueChange, getAllTeams } from "../features/teamSlice";
 import { useDispatch, useSelector } from "react-redux";
 const AppBar = () => {
-  const { teams, leagueId, leagueName, isLoading } = useSelector(
-    (store) => store.team
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllTeams());
-  }, [leagueId]);
-
-  if (!teams[0]) {
-    return <h1>Loading...</h1>;
-  }
-  console.log(teams[0].league.name);
   return (
     <>
-      <Select
+      {/* <Select
         varian="outlined"
         style={{ width: 100, height: 40, marginLeft: 15 }}
         value={leagueId}
@@ -39,7 +26,7 @@ const AppBar = () => {
       </Typography>
       <Typography variant="h1" component="h1">
         {teams[0]?.league.name}
-      </Typography>
+      </Typography> */}
     </>
   );
 };
