@@ -7,8 +7,32 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import TeamStats from "../components/TeamStats";
 import { styled, alpha } from "@mui/material/styles";
+const LayoutContainer = styled("div")(({ theme }) => ({
+  height: "100vh",
+  overflow: "hidden",
+  width: "100%",
+
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
+
+const Sidebar = styled("div")(({ theme }) => ({
+  width: "30%",
+
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  marginTop: 25,
+  borderRight: "2px solid grey",
+}));
+
 const Teams = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -21,57 +45,30 @@ const Teams = () => {
     return <h1>Loading...</h1>;
   }
 
-  const LayoutContainer = styled("div")(() => ({
-    height: "100vh",
-    overflow: "hidden",
-    width: "100%",
-    padding: "3rem",
-  }));
-
   console.log(team[0]);
   const { team: teamInfo, venue } = team[0];
   return (
     <Container maxWidth="xl">
       <LayoutContainer>
-        <img src={teamInfo.logo} alt="" />
-
-        <Grid
-          container
-          spacing={3}
-          justifyContent="flex-start"
-          alignItems="center"
+        <Sidebar>
+          <img src={teamInfo.logo} alt="" className="team-logo-page" />
+          <Typography variant="h4" component="h4">
+            {teamInfo.name}
+          </Typography>
+          <Typography variant="h4" component="h4">
+            {teamInfo.country}
+          </Typography>
+          <Typography variant="h4" component="h4">
+            {teamInfo.founded}
+          </Typography>
+        </Sidebar>
+        <Box
+          sx={{
+            width: "auto",
+          }}
         >
-          <Grid item xs={6}>
-            <Typography variant="h5" component="h4" align="left">
-              Team: {teamInfo.name}
-            </Typography>
-            <Typography variant="h6" component="h4" align="left">
-              Country: {teamInfo.country}
-            </Typography>
-            <Typography variant="h6" component="h4">
-              Founded: {teamInfo.founded}
-            </Typography>
-            <Typography variant="h4" component="h4">
-              Stadium: {venue.name}
-            </Typography>
-
-            <Typography variant="h6" component="h4">
-              City: {venue.city}
-            </Typography>
-            <Typography variant="h6" component="h4">
-              Capacity: {venue.capacity}
-            </Typography>
-            <Typography variant="h6" component="h4">
-              Surface:{" "}
-              {venue.surface.charAt(0).toUpperCase() + venue.surface.slice(1)}
-            </Typography>
-          </Grid>
-
-          <Grid item xs={6} justifyContent="center" alignItems="center">
-            <img src={venue.image} alt="" className="stadium-pic" />
-          </Grid>
-        </Grid>
-        <Link to="/">Home</Link>
+          <TeamStats />
+        </Box>
       </LayoutContainer>
     </Container>
   );
