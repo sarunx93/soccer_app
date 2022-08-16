@@ -17,8 +17,9 @@ export const getTeams = createAsyncThunk(
   "team/getTeams",
   async (id, thunkAPI) => {
     const { teamId } = thunkAPI.getState().team;
-
-    let url = `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`;
+    const { leagueId } = thunkAPI.getState().league;
+    console.log(leagueId);
+    let url = `https://api-football-v1.p.rapidapi.com/v3/teams?id=${teamId}`;
 
     try {
       const resp = await axios.get(url, {

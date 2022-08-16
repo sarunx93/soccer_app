@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TeamStats from "../components/TeamStats";
 import { styled, alpha } from "@mui/material/styles";
+import { handleTeamChange } from "../features/teamSlice";
 const LayoutContainer = styled("div")(({ theme }) => ({
   height: "100vh",
   overflow: "hidden",
@@ -38,13 +39,14 @@ const Teams = () => {
   const { id } = useParams();
   const { team, isLoading, teamId } = useSelector((store) => store.team);
   useEffect(() => {
-    dispatch(getTeams(id));
+    dispatch(handleTeamChange(id));
+    dispatch(getTeams(teamId));
   }, []);
 
   if (!team[0] || isLoading) {
     return <h1>Loading...</h1>;
   }
-
+  console.log(teamId);
   console.log(team[0]);
   const { team: teamInfo, venue } = team[0];
   return (
