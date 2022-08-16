@@ -5,6 +5,8 @@ import Teams from "./pages/Teams";
 import AppBar from "./components/AppBar";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllTeams } from "./features/teamSlice";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 function App() {
   return (
     <div className="App">
@@ -12,7 +14,7 @@ function App() {
         <AppBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/teams" element={<Teams />} />
+          <Route path="/teams/:id" element={<Teams />} />
         </Routes>
       </BrowserRouter>
     </div>

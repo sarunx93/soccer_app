@@ -12,11 +12,18 @@ const FilterButton = () => {
   };
   return (
     <div>
-      {leagueInfo.map((league) => (
+      {leagueInfo.map((league, id) => (
         <>
           <Button
+            key={id}
             onClick={setLeagueId(league.id)}
-            sx={{ color: league.name === leagueName ? "red" : "blue" }}
+            sx={{
+              color: league.name === leagueName ? "red" : "blue",
+              fontFamily: "Mitr",
+              fontWeight: "600",
+              fontSize: "28px",
+              marginRight: "2rem",
+            }}
           >
             {league.name}
           </Button>

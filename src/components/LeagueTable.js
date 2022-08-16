@@ -4,6 +4,7 @@ import {
   handleLeagueChange,
 } from "../features/leagueSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Container,
   Box,
@@ -19,25 +20,41 @@ import {
   Pagination,
   Button,
 } from "@mui/material";
-
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { handleTeamChange } from "../features/teamSlice";
 const LeagueTable = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { leagueStandings, isLoading, leagueId } = useSelector(
     (store) => store.league
   );
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
   useEffect(() => {
     dispatch(getLeagueStandings());
   }, [leagueId]);
-
+  const setTeamId = (id) => {
+    return () => dispatch(handleTeamChange(id));
+  };
   //
   if (isLoading || !leagueStandings.standings) {
     return <h1>Loading...</h1>;
   }
 
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <img src={leagueStandings.logo} className="league-logo" />
-      <Typography sx={{ textAlign: "center" }}>
+      <Typography
+        sx={{
+          textAlign: "center",
+          fontFamily: "Mitr",
+          fontSize: "24px",
+          marginBottom: "1rem",
+        }}
+      >
         {leagueStandings.name}
       </Typography>
       <TableContainer component={Paper}>
@@ -54,16 +71,30 @@ const LeagueTable = () => {
               <TableCell align="center">Points</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {leagueStandings.standings[0].map((row) => {
               const { rank, all, team, goalsDiff, points } = row;
+
               return (
-                <TableRow>
+                <TableRow key={team.id}>
                   <TableCell>{rank}</TableCell>
-                  <TableCell sx={{ display: "flex", alignItems: "center" }}>
+
+                  <TableCell
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      setTeamId(team.id);
+                      navigate(`/teams/${team.id}`);
+                    }}
+                  >
                     <img src={row.team.logo} className="team-logo-table" />
                     {row.team.name}
                   </TableCell>
+
                   <TableCell align="center">{all.played}</TableCell>
                   <TableCell align="center">{all.win}</TableCell>
                   <TableCell align="center">{all.draw}</TableCell>
@@ -76,7 +107,7 @@ const LeagueTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </ThemeProvider>
   );
 };
 //standings.all played (num of match), win, draw, lose
