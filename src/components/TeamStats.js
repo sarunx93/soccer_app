@@ -1,7 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getTeamStats } from "../features/teamSlice";
+import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+const minuteLabels = [
+  "0-15",
+  "16-30",
+  "31-45",
+  "46-60",
+  "61-75",
+  "76-90",
+  "91-105",
+  "106-120",
+];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-const TeamStats = () => {
-  return <div>TeamStats</div>;
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {},
+    title: {
+      display: true,
+      text: "Chart.js Bar Chart",
+    },
+  },
+};
+
+const TeamStats = ({ stats }) => {
+  console.log(stats.goals);
+  const preGoalsFor = Array.from(Object.values(stats.goals.for.minute));
+  const goalFor = preGoalsFor.map((goal) =>
+    goal.total === null ? 0 : goal.total
+  );
+  console.log(goalFor);
+  return (
+    <div>
+      <Bar data={{ labels: minuteLabels, datasets: [{ data: goalFor }] }} />
+    </div>
+  );
 };
 
 export default TeamStats;
