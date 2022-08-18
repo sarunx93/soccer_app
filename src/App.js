@@ -14,7 +14,7 @@ function App() {
         <AppBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/teams/:id" element={<Teams />} />
+          <Route path="/teams/:id/:league" element={<Teams />} />
         </Routes>
       </BrowserRouter>
     </div>

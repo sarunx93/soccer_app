@@ -10,7 +10,9 @@ import Typography from "@mui/material/Typography";
 import TeamStats from "../components/TeamStats";
 import { styled, alpha } from "@mui/material/styles";
 import { handleTeamChange } from "../features/teamSlice";
+import { handleLeagueChange } from "../features/leagueSlice";
 import Lineup from "../components/Lineup";
+import { lightGreen } from "@mui/material/colors";
 const LayoutContainer = styled("div")(({ theme }) => ({
   height: "100vh",
   overflow: "hidden",
@@ -50,11 +52,13 @@ const ChartContainer = styled("div")(({ theme }) => ({
 
 const Teams = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id, league } = useParams();
   const { team, isLoading, teamId, stats } = useSelector((store) => store.team);
 
+  console.log(stats);
   useEffect(() => {
     dispatch(handleTeamChange(id));
+    dispatch(handleLeagueChange(league));
     dispatch(getTeams());
     dispatch(getTeamStats());
   }, []);
@@ -65,8 +69,7 @@ const Teams = () => {
   // if (isLoading) {
   //   return <h1>Loading...</h1>;
   // }
-  console.log(teamId);
-  console.log(team[0]);
+
   // console.log(stats);
   const { team: teamInfo, venue } = team[0];
   return (
@@ -86,7 +89,7 @@ const Teams = () => {
         </Sidebar>
         <ChartContainer>
           <TeamStats stats={stats} />
-          <Lineup stats={stats} />
+          <Lineup lineups={stats.lineups} />
         </ChartContainer>
       </LayoutContainer>
     </Container>

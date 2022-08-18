@@ -39,11 +39,15 @@ const LeagueTable = () => {
   const setTeamId = (id) => {
     return () => dispatch(handleTeamChange(id));
   };
+  const setLeagueId = (id) => {
+    return () => dispatch(handleLeagueChange(id));
+  };
+
   //
   if (isLoading || !leagueStandings.standings) {
     return <h1>Loading...</h1>;
   }
-
+  console.log(leagueStandings);
   return (
     <ThemeProvider theme={darkTheme}>
       <img src={leagueStandings.logo} className="league-logo" />
@@ -88,7 +92,8 @@ const LeagueTable = () => {
                     }}
                     onClick={() => {
                       setTeamId(team.id);
-                      navigate(`/teams/${team.id}`);
+                      setLeagueId(leagueStandings.id);
+                      navigate(`/teams/${team.id}/${leagueStandings.id}`);
                     }}
                   >
                     <img src={row.team.logo} className="team-logo-table" />

@@ -12,7 +12,7 @@ const initialState = {
     message: "",
     type: "success",
   },
-  stats: [],
+  stats: {},
   displayGoalMinute: "For",
 };
 
@@ -75,8 +75,9 @@ const teamSlice = createSlice({
       state.isLoading = true;
     },
     [getTeams.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
+      console.log(payload);
       state.team = payload;
+      state.isLoading = false;
     },
     [getTeams.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -86,8 +87,9 @@ const teamSlice = createSlice({
       state.isLoading = true;
     },
     [getTeamStats.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
+      console.log(payload);
       state.stats = payload;
+      state.isLoading = false;
     },
     [getTeamStats.rejected]: (state, { payload }) => {
       state.isLoading = false;
