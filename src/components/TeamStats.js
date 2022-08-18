@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamStats } from "../features/teamSlice";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -44,14 +45,34 @@ export const options = {
 
 const TeamStats = ({ stats }) => {
   console.log(stats.goals);
+
+  //GF
   const preGoalsFor = Array.from(Object.values(stats.goals.for.minute));
   const goalFor = preGoalsFor.map((goal) =>
+    goal.total === null ? 0 : goal.total
+  );
+
+  //GA
+  const preGoalsAgainst = Array.from(Object.values(stats.goals.against.minute));
+  const goalAgainst = preGoalsAgainst.map((goal) =>
     goal.total === null ? 0 : goal.total
   );
   console.log(goalFor);
   return (
     <div>
-      <Bar data={{ labels: minuteLabels, datasets: [{ data: goalFor }] }} />
+      <Bar
+        data={{
+          labels: minuteLabels,
+          datasets: [
+            { label: "GF", data: goalFor, backgroundColor: "green" },
+            {
+              label: "GA",
+              data: goalAgainst,
+              backgroundColor: "red",
+            },
+          ],
+        }}
+      />
     </div>
   );
 };

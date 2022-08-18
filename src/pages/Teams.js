@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import TeamStats from "../components/TeamStats";
 import { styled, alpha } from "@mui/material/styles";
 import { handleTeamChange } from "../features/teamSlice";
+import Lineup from "../components/Lineup";
 const LayoutContainer = styled("div")(({ theme }) => ({
   height: "100vh",
   overflow: "hidden",
@@ -22,7 +23,7 @@ const LayoutContainer = styled("div")(({ theme }) => ({
 }));
 
 const Sidebar = styled("div")(({ theme }) => ({
-  width: "30%",
+  width: "20%",
 
   [theme.breakpoints.down("md")]: {
     width: "100%",
@@ -85,6 +86,7 @@ const Teams = () => {
         </Sidebar>
         <ChartContainer>
           <TeamStats stats={stats} />
+          <Lineup stats={stats} />
         </ChartContainer>
       </LayoutContainer>
     </Container>
