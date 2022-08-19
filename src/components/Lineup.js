@@ -2,8 +2,6 @@ import SoccerLineUp from "react-soccer-lineup";
 import React from "react";
 
 const Lineup = ({ lineups }) => {
-  //   const { lineups } = stats;
-  console.log(lineups);
   const formationArr = lineups[0].formation
     .split("-")
     .map((num) => parseInt(num));

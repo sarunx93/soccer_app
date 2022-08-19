@@ -12,7 +12,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { handleTeamChange } from "../features/teamSlice";
 import { handleLeagueChange } from "../features/leagueSlice";
 import Lineup from "../components/Lineup";
-import { lightGreen } from "@mui/material/colors";
+import PercentBar from "../components/PercentBar";
 const LayoutContainer = styled("div")(({ theme }) => ({
   height: "100vh",
   overflow: "hidden",
@@ -55,7 +55,6 @@ const Teams = () => {
   const { id, league } = useParams();
   const { team, isLoading, teamId, stats } = useSelector((store) => store.team);
 
-  console.log(stats);
   useEffect(() => {
     dispatch(handleTeamChange(id));
     dispatch(handleLeagueChange(league));
@@ -66,26 +65,34 @@ const Teams = () => {
   if (!team[0] || isLoading || !stats.goals) {
     return <h1>Loading...</h1>;
   }
-  // if (isLoading) {
-  //   return <h1>Loading...</h1>;
-  // }
 
-  // console.log(stats);
   const { team: teamInfo, venue } = team[0];
+  const { clean_sheet, penalty, goals } = stats;
+  console.log(penalty.scored.percentage);
   return (
     <Container maxWidth="xl">
       <LayoutContainer>
         <Sidebar>
           <img src={teamInfo.logo} alt="" className="team-logo-page" />
           <Typography variant="h4" component="h4">
-            {teamInfo.name}
+            {teamInfo.name} ({teamInfo.founded})
           </Typography>
           <Typography variant="h4" component="h4">
             {teamInfo.country}
           </Typography>
           <Typography variant="h4" component="h4">
-            {teamInfo.founded}
+            GF: {goals.for.total.total}
           </Typography>
+          <Typography variant="h4" component="h4">
+            GA: {goals.against.total.total}
+          </Typography>
+          {/* clean sheet */}
+          <Typography variant="h4" component="h4">
+            Clean Sheet: {clean_sheet.total}
+          </Typography>
+          {/* penalty scored */}
+
+          <PercentBar percent={penalty.scored.percentage} />
         </Sidebar>
         <ChartContainer>
           <TeamStats stats={stats} />
