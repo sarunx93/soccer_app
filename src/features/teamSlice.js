@@ -13,7 +13,8 @@ const initialState = {
     type: "success",
   },
   stats: {},
-  displayGoalMinute: "For",
+  user: null,
+  watchList: [],
 };
 
 export const getTeams = createAsyncThunk(
@@ -68,6 +69,18 @@ const teamSlice = createSlice({
     handleTeamChange: (state, { payload }) => {
       state.teamId = payload;
     },
+    setUser: (state, { payload }) => {
+      state.user = payload;
+    },
+    setWatchList: (state, { payload }) => {
+      state.watchList = payload;
+    },
+    handleAlert: (state, { payload }) => {
+      const { open, message, type } = payload;
+      state.alert.open = open;
+      state.alert.message = message;
+      state.alert.type = type;
+    },
   },
 
   extraReducers: {
@@ -97,5 +110,6 @@ const teamSlice = createSlice({
     },
   },
 });
-export const { handleTeamChange } = teamSlice.actions;
+export const { handleTeamChange, setUser, setWatchList, handleAlert } =
+  teamSlice.actions;
 export default teamSlice.reducer;
