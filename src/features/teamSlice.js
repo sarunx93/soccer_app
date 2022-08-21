@@ -4,6 +4,7 @@ import { startTransition } from "react";
 
 const initialState = {
   team: [],
+  teams: [],
   teamId: "",
   teamName: "",
   isLoading: true,
@@ -81,6 +82,10 @@ const teamSlice = createSlice({
       state.alert.message = message;
       state.alert.type = type;
     },
+    addToTeams: (state, { payload }) => {
+      //add the whole object to an array
+      state.teams.push(payload);
+    },
   },
 
   extraReducers: {
@@ -110,6 +115,11 @@ const teamSlice = createSlice({
     },
   },
 });
-export const { handleTeamChange, setUser, setWatchList, handleAlert } =
-  teamSlice.actions;
+export const {
+  handleTeamChange,
+  setUser,
+  setWatchList,
+  handleAlert,
+  addToTeams,
+} = teamSlice.actions;
 export default teamSlice.reducer;

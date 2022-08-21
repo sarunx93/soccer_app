@@ -8,8 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllTeams } from "./features/teamSlice";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { onAuthStateChanged } from "firebase/auth";
-import { setUser } from "./features/teamSlice";
-import { auth } from "./firebase";
+import { setUser, setWatchList } from "./features/teamSlice";
+import { auth, db } from "./firebase";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import Alert from "./components/Alert";
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,23 @@ function App() {
       console.log(myUser);
     });
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      const teamRef = doc(db, "watchList", user.uid);
+      var unsubscribe = onSnapshot(teamRef, (team) => {
+        if (team.exists()) {
+          dispatch(setWatchList(team.data().teams));
+        } else {
+          console.log("No item in the watchlist");
+        }
+      });
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [user]);
+
   return (
     <div className="App">
       <BrowserRouter>

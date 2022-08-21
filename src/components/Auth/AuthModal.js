@@ -38,8 +38,9 @@ export default function AuthModal() {
       .then((res) => {
         dispatch(
           handleAlert({
-            opem: true,
+            open: true,
             message: `Sign up successful. Welcome ${res.user.email}`,
+            type: "success",
           })
         );
         handleClose();

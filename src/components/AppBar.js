@@ -4,6 +4,7 @@ import { handleLeagueChange, getAllTeams } from "../features/teamSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthModal from "./Auth/AuthModal";
+import UserSiderbar from "./UserSiderbar";
 const NavBar = () => {
   //get user from slice
   const { user, watchList } = useSelector((store) => store.team);
@@ -14,7 +15,7 @@ const NavBar = () => {
           <Link to="/">
             <Typography variant="h6">Soccer App</Typography>
           </Link>
-          {user ? "logout" : <AuthModal />}
+          {user ? <UserSiderbar /> : <AuthModal />}
         </Toolbar>
       </Container>
     </AppBar>
