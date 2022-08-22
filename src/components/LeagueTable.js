@@ -47,7 +47,7 @@ const LeagueTable = () => {
   if (isLoading || !leagueStandings.standings) {
     return <h1>Loading...</h1>;
   }
-  console.log(leagueStandings);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <img src={leagueStandings.logo} className="league-logo" />

@@ -12,6 +12,7 @@ import { setUser, setWatchList } from "./features/teamSlice";
 import { auth, db } from "./firebase";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import Alert from "./components/Alert";
+import UserSiderbar from "./components/UserSiderbar";
 function App() {
   const dispatch = useDispatch();
   const { user, watchList } = useSelector((store) => store.team);

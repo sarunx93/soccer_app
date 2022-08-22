@@ -44,8 +44,6 @@ export const options = {
 };
 
 const TeamStats = ({ stats }) => {
-  console.log(stats.goals);
-
   //GF
   const preGoalsFor = Array.from(Object.values(stats.goals.for.minute));
   const goalFor = preGoalsFor.map((goal) =>
@@ -57,7 +55,7 @@ const TeamStats = ({ stats }) => {
   const goalAgainst = preGoalsAgainst.map((goal) =>
     goal.total === null ? 0 : goal.total
   );
-  console.log(goalFor);
+
   return (
     <div>
       <Bar

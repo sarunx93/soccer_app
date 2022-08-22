@@ -4,11 +4,14 @@ import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { Avatar } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { signOut, GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 import { auth, db } from "../firebase";
 import { handleAlert } from "../features/teamSlice";
 import { doc, setDoc } from "firebase/firestore";
+import { handleTeamChange } from "../features/teamSlice";
+import { handleLeagueChange } from "../features/leagueSlice";
+import { useParams, Link, useNavigate } from "react-router-dom";
 const useStyles = makeStyles({
   container: {
     width: 350,
@@ -59,11 +62,13 @@ const useStyles = makeStyles({
 });
 const UserSiderbar = () => {
   const classes = useStyles();
+
   const [state, setState] = useState({
     right: false,
   });
   const dispatch = useDispatch();
-  const { user, teams, watchlist } = useSelector((store) => store.team);
+  const { user, teamId, watchList, team } = useSelector((store) => store.team);
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -84,6 +89,30 @@ const UserSiderbar = () => {
       })
     );
     toggleDrawer();
+  };
+  const removeFromWatchlist = async (team) => {
+    //team[0].team.id
+    const teamRef = doc(db, "watchList", user.uid);
+    try {
+      await setDoc(teamRef, {
+        teams: watchList.filter((list) => list.name !== team.name),
+      });
+      dispatch(
+        handleAlert({
+          open: true,
+          message: `${team.name} removed to the watchlist`,
+          type: "success",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        handleAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
+    }
   };
   return (
     <>
@@ -131,7 +160,20 @@ const UserSiderbar = () => {
             </span>
             <div className={classes.watchlist}>
               <span style={{ fontSize: 15, textShadow: "0 0 5px black" }}>
-                Watchlist
+                {watchList.map((list) => {
+                  return (
+                    <div style={{ display: "flex" }}>
+                      <Typography>{list.name}</Typography>
+
+                      <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => removeFromWatchlist(list)}
+                      >
+                        delete
+                      </span>
+                    </div>
+                  );
+                })}
               </span>
             </div>
           </div>

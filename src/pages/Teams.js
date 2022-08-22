@@ -61,19 +61,15 @@ const ChartContainer = styled("div")(({ theme }) => ({
 const Teams = () => {
   const dispatch = useDispatch();
   const { id, league } = useParams();
-  const { team, isLoading, user, stats, watchList } = useSelector(
-    (store) => store.team
-  );
-
-  console.log(watchList);
+  const { team, isLoading, user, stats } = useSelector((store) => store.team);
+  let { watchList } = useSelector((store) => store.team);
+  console.log(team);
   const addToWatchlist = async () => {
     //team[0].team.id
     const teamRef = doc(db, "watchList", user.uid);
     try {
       await setDoc(teamRef, {
-        teams: watchList
-          ? [...watchList, team[0].team.name]
-          : [team[0].team.name],
+        teams: watchList ? [...watchList, team[0].team] : [team[0].team],
       });
       dispatch(
         handleAlert({
@@ -92,8 +88,31 @@ const Teams = () => {
       );
     }
   };
+  const removeFromWatchlist = async () => {
+    //team[0].team.id
+    const teamRef = doc(db, "watchList", user.uid);
+    try {
+      await setDoc(teamRef, {
+        teams: watchList.filter((list) => list.name !== team[0].team.name),
+      });
+      dispatch(
+        handleAlert({
+          open: true,
+          message: `${team[0].team.name} removed to the watchlist`,
+          type: "success",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        handleAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
+    }
+  };
 
-  console.log(team[0]);
   useEffect(() => {
     dispatch(handleTeamChange(id));
     dispatch(handleLeagueChange(league));
@@ -106,10 +125,12 @@ const Teams = () => {
 
   const { team: teamInfo, venue } = team[0];
   const { clean_sheet, penalty, goals } = stats;
-  const inWatchList = watchList.includes(teamInfo.name);
-  console.log(watchList);
-  console.log(inWatchList);
+  if (watchList === undefined) watchList = [];
 
+  const inWatchList = watchList
+    ?.map((list) => list.name)
+    .includes(team[0].team.name);
+  console.log(watchList);
   return (
     <Container maxWidth="xl">
       <LayoutContainer>
@@ -138,7 +159,7 @@ const Teams = () => {
             <Button
               variant="outlined"
               style={{ width: "100%", height: 40, backgroundColor: "#EEBC1D" }}
-              onClick={addToWatchlist}
+              onClick={inWatchList ? removeFromWatchlist : addToWatchlist}
             >
               {inWatchList ? "Remove from watchList" : "Add to watchList"}
             </Button>

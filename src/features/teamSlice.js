@@ -84,7 +84,7 @@ const teamSlice = createSlice({
     },
     addToTeams: (state, { payload }) => {
       //add the whole object to an array
-      state.teams.push(payload);
+      // state.teams.push(payload);
     },
   },
 
