@@ -1,9 +1,9 @@
 import React from "react";
-
-const PercentBar = ({ percent }) => {
+import Typography from "@mui/material/Typography";
+const PercentBar = ({ percent, scored, missed, total }) => {
   const containerStyle = {
     height: 20,
-    width: "80%",
+    width: "60%",
     backgroundColor: "#e0e0de",
     borderRadius: 50,
   };
@@ -19,10 +19,28 @@ const PercentBar = ({ percent }) => {
     color: "white",
     fontWeight: "bold",
   };
+  const headingText = {
+    fontFamily: "Russo One",
+  };
+  const spanText = {
+    fontFamily: "Mitr",
+    fontWeight: "100",
+  };
 
   return (
     <>
-      <h4>Penalty Rate</h4>
+      <Typography variant="h4" component="h4" sx={headingText}>
+        Penalty Rate
+      </Typography>
+      <Typography variant="h6" component="h4" sx={headingText}>
+        Scored: <span style={spanText}>{scored}</span>
+      </Typography>
+      <Typography variant="h6" component="h4" sx={headingText}>
+        Missed: <span style={spanText}>{missed}</span>
+      </Typography>
+      <Typography variant="h6" component="h4" sx={headingText}>
+        Total: <span style={spanText}>{total}</span>
+      </Typography>
       <div style={containerStyle}>
         <div style={fillerStyle}>
           <span style={labelStyle}>{`${percent}`}</span>

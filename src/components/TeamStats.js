@@ -57,7 +57,7 @@ const TeamStats = ({ stats }) => {
   );
 
   return (
-    <div>
+    <div style={{ width: "70%" }}>
       <Bar
         data={{
           labels: minuteLabels,

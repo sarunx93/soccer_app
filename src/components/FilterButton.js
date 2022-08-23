@@ -11,18 +11,24 @@ const FilterButton = () => {
     return () => dispatch(handleLeagueChange(id));
   };
   return (
-    <div>
+    <div style={{ marginTop: "1.5rem" }}>
       {leagueInfo.map((league, id) => (
         <>
           <Button
             key={id}
             onClick={setLeagueId(league.id)}
             sx={{
-              color: league.name === leagueName ? "red" : "blue",
-              fontFamily: "Mitr",
+              color: league.name === leagueName ? "#078500" : "#C7D3C7",
+              fontFamily: "Russo One",
               fontWeight: "600",
               fontSize: "28px",
               marginRight: "2rem",
+
+              borderRadius: "5%",
+              "&:hover": {
+                color: "#56A9B8",
+                backgroundColor: "#EEF7EE",
+              },
             }}
           >
             {league.name}

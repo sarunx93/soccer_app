@@ -1,5 +1,6 @@
 import SoccerLineUp from "react-soccer-lineup";
 import React from "react";
+import { styled, alpha } from "@mui/material/styles";
 
 const Lineup = ({ lineups }) => {
   const formationArr = lineups[0].formation
@@ -44,13 +45,16 @@ const Lineup = ({ lineups }) => {
     return <h1>No lineup avaialble for this team.</h1>;
   }
   return (
-    <div>
-      <SoccerLineUp
-        color={"lightseagreen"}
-        pattern={"lines"}
-        homeTeam={homeTeam}
-      />
-    </div>
+    <>
+      <h1 className="formation-text">Most-used Formation</h1>
+      <div className="lineup">
+        <SoccerLineUp
+          color={"lightseagreen"}
+          pattern={"lines"}
+          homeTeam={homeTeam}
+        />
+      </div>
+    </>
   );
 };
 

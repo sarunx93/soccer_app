@@ -114,16 +114,17 @@ const UserSiderbar = () => {
       );
     }
   };
+
   return (
     <>
       <Avatar
         onClick={toggleDrawer("right", true)}
         style={{
-          height: 38,
-          width: 38,
+          height: 50,
+          width: 50,
           marginLeft: 15,
           cursor: "pointer",
-          backgroundColor: "gold",
+          backgroundColor: "white",
         }}
         src={user.photoURL}
         alt={user.displayName || user.email}

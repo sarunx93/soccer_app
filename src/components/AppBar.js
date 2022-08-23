@@ -5,15 +5,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthModal from "./Auth/AuthModal";
 import UserSiderbar from "./UserSiderbar";
+
+const title = {
+  textDecoration: "none",
+  fontFamily: "Russo One",
+  color: "#77EE79",
+  fontSize: "2.75rem",
+};
+
+const navbar = {
+  display: "flex",
+  justifyContent: "space-between",
+};
+
 const NavBar = () => {
   //get user from slice
   const { user, watchList } = useSelector((store) => store.team);
   return (
-    <AppBar color="transparent" position="static">
+    <AppBar color="primary" position="static" sx={{ background: "#687D79" }}>
       <Container>
-        <Toolbar>
-          <Link to="/">
-            <Typography variant="h6">Soccer App</Typography>
+        <Toolbar sx={navbar}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant="h4" sx={title}>
+              Soccer App
+            </Typography>
           </Link>
           {user ? <UserSiderbar /> : <AuthModal />}
         </Toolbar>
