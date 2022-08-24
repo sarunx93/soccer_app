@@ -41,14 +41,27 @@ const Sidebar = styled("div")(({ theme }) => ({
     width: "100%",
     height: "100vh",
     borderRight: "none",
+    alignItems: "center",
   },
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
+  alignItems: "left",
   justifyContent: "center",
+  padding: "2rem",
 
   borderRight: "2px solid grey",
 }));
+
+const BarContianer = styled("div")(({ theme }) => ({
+  // height: "100%",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+    height: "100vh",
+    borderRight: "none",
+    alignItems: "center",
+  },
+}));
+
 const ChartContainer = styled("div")(({ theme }) => ({
   width: "75%",
   display: "flex",
@@ -70,6 +83,7 @@ const ChartContainer = styled("div")(({ theme }) => ({
 
 const headingText = {
   fontFamily: "Russo One",
+  textAlign: "left",
 };
 const spanText = {
   fontFamily: "Mitr",
@@ -167,13 +181,23 @@ const Teams = () => {
     <>
       <LayoutContainer>
         <Sidebar>
-          <img src={teamInfo.logo} alt="" className="team-logo-page" />
-          <Typography variant="h4" component="h4" sx={headingText}>
-            {teamInfo.name}
-          </Typography>
-          <Typography variant="h4" component="h4" sx={headingText}>
-            {teamInfo.country}
-          </Typography>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <img src={teamInfo.logo} alt="" className="team-logo-page" />
+            <Typography variant="h4" component="h4" sx={headingText}>
+              {teamInfo.name}
+            </Typography>
+            <Typography variant="h4" component="h4" sx={headingText}>
+              {teamInfo.country}
+            </Typography>
+          </div>
+
           <Typography variant="h4" component="h4" sx={headingText}>
             GF: <span style={spanText}>{goals.for.total.total}</span>
           </Typography>
@@ -184,30 +208,35 @@ const Teams = () => {
           <Typography variant="h4" component="h4" sx={headingText}>
             Clean Sheet: <span style={spanText}>{clean_sheet.total}</span>
           </Typography>
+          <Typography variant="h4" component="h4" sx={headingText}>
+            Penalty Rate:
+          </Typography>
           {/* penalty scored */}
-
-          <PercentBar
-            percent={penalty.scored.percentage}
-            scored={penalty.scored.total}
-            missed={penalty.missed.total}
-            total={penalty.total}
-          />
-          {user && (
-            <Button
-              variant="outlined"
-              style={{
-                width: "50%",
-                height: 40,
-                backgroundColor: "#EEBC1D",
-                marginTop: 8,
-                fontFamily: "Russo One",
-              }}
-              onClick={inWatchList ? removeFromWatchlist : addToWatchlist}
-            >
-              {inWatchList ? "Remove from watchList" : "Add to watchList"}
-            </Button>
-          )}
+          <BarContianer>
+            <PercentBar
+              percent={penalty.scored.percentage}
+              scored={penalty.scored.total}
+              missed={penalty.missed.total}
+              total={penalty.total}
+            />
+            {user && (
+              <Button
+                variant="outlined"
+                style={{
+                  width: "50%",
+                  height: 40,
+                  backgroundColor: "#EEBC1D",
+                  marginTop: 8,
+                  fontFamily: "Russo One",
+                }}
+                onClick={inWatchList ? removeFromWatchlist : addToWatchlist}
+              >
+                {inWatchList ? "Remove" : "Add"}
+              </Button>
+            )}
+          </BarContianer>
         </Sidebar>
+
         <ChartContainer>
           {show === "Goals" && <TeamStats stats={stats} />}
 

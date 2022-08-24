@@ -6,6 +6,7 @@ const PercentBar = ({ percent, scored, missed, total }) => {
     width: "60%",
     backgroundColor: "#e0e0de",
     borderRadius: 50,
+    margin: "0 auto",
   };
   const fillerStyle = {
     height: "100%",
@@ -29,9 +30,6 @@ const PercentBar = ({ percent, scored, missed, total }) => {
 
   return (
     <>
-      <Typography variant="h4" component="h4" sx={headingText}>
-        Penalty Rate
-      </Typography>
       <Typography variant="h6" component="h4" sx={headingText}>
         Scored: <span style={spanText}>{scored}</span>
       </Typography>

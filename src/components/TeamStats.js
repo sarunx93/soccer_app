@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamStats } from "../features/teamSlice";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-
+import Typography from "@mui/material/Typography";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -32,14 +32,20 @@ ChartJS.register(
   Legend
 );
 
+const title = {
+  fontFamily: "Russo One",
+};
+
 export const options = {
   responsive: true,
   plugins: {
     legend: {},
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
     },
+  },
+  scales: {
+    y: { ticks: { stepSize: 1 } },
   },
 };
 
@@ -47,18 +53,22 @@ const TeamStats = ({ stats }) => {
   //GF
   const preGoalsFor = Array.from(Object.values(stats.goals.for.minute));
   const goalFor = preGoalsFor.map((goal) =>
-    goal.total === null ? 0 : goal.total
+    goal.total === null ? 0 : Math.ceil(goal.total)
   );
 
   //GA
   const preGoalsAgainst = Array.from(Object.values(stats.goals.against.minute));
   const goalAgainst = preGoalsAgainst.map((goal) =>
-    goal.total === null ? 0 : goal.total
+    goal.total === null ? 0 : Math.ceil(goal.total)
   );
 
   return (
     <div style={{ width: "70%" }}>
+      <Typography variant="h3" sx={title}>
+        Goals by Minutes
+      </Typography>
       <Bar
+        options={options}
         data={{
           labels: minuteLabels,
           datasets: [
