@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const initialState = {
   leagueStandings: [],
+  fixtures: [],
   leagueId: "39",
   leagueName: "Premier League",
   isLoading: false,
@@ -25,6 +26,26 @@ export const getLeagueStandings = createAsyncThunk(
     const { leagueId, thisSeason } = thunkAPI.getState().league;
 
     let url = `https://api-football-v1.p.rapidapi.com/v3/standings?season=${thisSeason}&league=${leagueId}`;
+    try {
+      const resp = await axios.get(url, {
+        headers: {
+          "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+          "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+        },
+      });
+
+      return resp.data.response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
+
+export const getLeagueFixtures = createAsyncThunk(
+  "league/getLeagueFixtures",
+  async (_, thunkAPI) => {
+    const { leagueId, thisSeason } = thunkAPI.getState().league;
+    let url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueId}&season=${thisSeason}`;
     try {
       const resp = await axios.get(url, {
         headers: {
@@ -76,6 +97,17 @@ const leagueSlice = createSlice({
       state.leagueStandings = payload[0].league;
     },
     [getLeagueStandings.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      console.log(payload);
+    },
+    [getLeagueFixtures.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getLeagueFixtures.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.fixtures = payload;
+    },
+    [getLeagueFixtures.rejected]: (state, { payload }) => {
       state.isLoading = false;
       console.log(payload);
     },
