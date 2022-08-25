@@ -56,20 +56,25 @@
   transform: scale(1);
   padding: 0.5rem;
   height: auto;
-  
 }
+
+.team-stats{
+  
+  width:70%
+}
+
 .formation-text{
   margin-top: 0;
 }
 @media screen and (max-width: 992px) {
     .lineup{
-      height:'80%';
+    
       transform: rotate(270deg) scale(0.5);
     }
     .formation-text{
       margin-top: 8rem;
     }
-
+    
   }
 
 

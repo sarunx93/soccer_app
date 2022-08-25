@@ -9,7 +9,7 @@ import UserSiderbar from "./UserSiderbar";
 const title = {
   textDecoration: "none",
   fontFamily: "Russo One",
-  color: "#77EE79",
+  color: "white",
   fontSize: "2.75rem",
 };
 
@@ -22,7 +22,7 @@ const NavBar = () => {
   //get user from slice
   const { user, watchList } = useSelector((store) => store.team);
   return (
-    <AppBar color="primary" position="static" sx={{ background: "#687D79" }}>
+    <AppBar color="primary" position="static" sx={{ background: "#000" }}>
       <Container>
         <Toolbar sx={navbar}>
           <Link to="/" style={{ textDecoration: "none" }}>

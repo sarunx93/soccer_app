@@ -73,11 +73,12 @@ const ChartContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     padding: 0,
     margin: 0,
-    height: "100px",
+    height: "100%",
     display: "flex",
     justifyContent: "flex-start",
     flexDirection: "column",
     alignItems: "center",
+    paddingTop: 0,
   },
 }));
 
@@ -240,7 +241,7 @@ const Teams = () => {
         <ChartContainer>
           {show === "Goals" && <TeamStats stats={stats} />}
 
-          {show === "Lineup" && <Lineup lineups={stats.lineups} />}
+          {show === "Formation" && <Lineup lineups={stats.lineups} />}
           <div
             style={{
               display: "flex",
@@ -258,9 +259,9 @@ const Teams = () => {
             <Button
               variant="outlined"
               style={displayButton}
-              onClick={() => setShow("Lineup")}
+              onClick={() => setShow("Formation")}
             >
-              Lineup
+              Formation
             </Button>
           </div>
         </ChartContainer>

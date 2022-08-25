@@ -123,17 +123,5 @@ const LeagueTable = () => {
     </ThemeProvider>
   );
 };
-//standings.all played (num of match), win, draw, lose
-//goalsDiff
-//rank
-export default LeagueTable;
-{
-  /* <TableRow>
-  <TableCell>{row.rank}</TableCell>
 
-  <TableCell sx={{ display: "flex", alignItems: "center" }}>
-    <img src={row.team.logo} className="team-logo-table" />
-    {row.team.name}
-  </TableCell>
-</TableRow>; */
-}
+export default LeagueTable;

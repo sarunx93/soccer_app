@@ -14,14 +14,14 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 const minuteLabels = [
-  "0-15",
-  "16-30",
-  "31-45",
-  "46-60",
-  "61-75",
-  "76-90",
-  "91-105",
-  "106-120",
+  "0-15 mins",
+  "16-30 mins",
+  "31-45 mins",
+  "46-60 mins",
+  "61-75 mins",
+  "76-90 mins",
+  "91-105 mins",
+  "106-120 mins",
 ];
 ChartJS.register(
   CategoryScale,
@@ -63,10 +63,11 @@ const TeamStats = ({ stats }) => {
   );
 
   return (
-    <div style={{ width: "70%" }}>
+    <>
       <Typography variant="h3" sx={title}>
         Goals by Minutes
       </Typography>
+
       <Bar
         options={options}
         data={{
@@ -81,7 +82,7 @@ const TeamStats = ({ stats }) => {
           ],
         }}
       />
-    </div>
+    </>
   );
 };
 
