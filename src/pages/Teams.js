@@ -30,13 +30,14 @@ const LayoutContainer = styled("div")(({ theme }) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingTop: "20px",
-    height: "auto",
+    // height: "auto",
+    width: "100%",
   },
 }));
 
 const Sidebar = styled("div")(({ theme }) => ({
   width: "25%",
-  // height: "100%",
+  height: "100%",
   [theme.breakpoints.down("md")]: {
     width: "100%",
     height: "100vh",
@@ -53,7 +54,7 @@ const Sidebar = styled("div")(({ theme }) => ({
 }));
 
 const BarContianer = styled("div")(({ theme }) => ({
-  // height: "100%",
+  height: "100%",
   [theme.breakpoints.down("md")]: {
     width: "100%",
     height: "100vh",
@@ -73,7 +74,7 @@ const ChartContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     padding: 0,
     margin: 0,
-    height: "100%",
+
     display: "flex",
     justifyContent: "flex-start",
     flexDirection: "column",
@@ -179,94 +180,92 @@ const Teams = () => {
     .includes(team[0].team.name);
   console.log(penalty);
   return (
-    <>
-      <LayoutContainer>
-        <Sidebar>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <img src={teamInfo.logo} alt="" className="team-logo-page" />
-            <Typography variant="h4" component="h4" sx={headingText}>
-              {teamInfo.name}
-            </Typography>
-            <Typography variant="h4" component="h4" sx={headingText}>
-              {teamInfo.country}
-            </Typography>
-          </div>
+    <LayoutContainer>
+      <Sidebar>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <img src={teamInfo.logo} alt="" className="team-logo-page" />
+          <Typography variant="h4" component="h4" sx={headingText}>
+            {teamInfo.name}
+          </Typography>
+          <Typography variant="h4" component="h4" sx={headingText}>
+            {teamInfo.country}
+          </Typography>
+        </div>
 
-          <Typography variant="h4" component="h4" sx={headingText}>
-            GF: <span style={spanText}>{goals.for.total.total}</span>
-          </Typography>
-          <Typography variant="h4" component="h4" sx={headingText}>
-            GA: <span style={spanText}>{goals.against.total.total}</span>
-          </Typography>
-          {/* clean sheet */}
-          <Typography variant="h4" component="h4" sx={headingText}>
-            Clean Sheet: <span style={spanText}>{clean_sheet.total}</span>
-          </Typography>
-          <Typography variant="h4" component="h4" sx={headingText}>
-            Penalty Rate:
-          </Typography>
-          {/* penalty scored */}
-          <BarContianer>
-            <PercentBar
-              percent={penalty.scored.percentage}
-              scored={penalty.scored.total}
-              missed={penalty.missed.total}
-              total={penalty.total}
-            />
-            {user && (
-              <Button
-                variant="outlined"
-                style={{
-                  width: "50%",
-                  height: 40,
-                  backgroundColor: "#EEBC1D",
-                  marginTop: 8,
-                  fontFamily: "Russo One",
-                }}
-                onClick={inWatchList ? removeFromWatchlist : addToWatchlist}
-              >
-                {inWatchList ? "Remove" : "Add"}
-              </Button>
-            )}
-          </BarContianer>
-        </Sidebar>
-
-        <ChartContainer>
-          {show === "Goals" && <TeamStats stats={stats} />}
-
-          {show === "Formation" && <Lineup lineups={stats.lineups} />}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              paddingBottom: "2rem",
-            }}
-          >
+        <Typography variant="h4" component="h4" sx={headingText}>
+          GF: <span style={spanText}>{goals.for.total.total}</span>
+        </Typography>
+        <Typography variant="h4" component="h4" sx={headingText}>
+          GA: <span style={spanText}>{goals.against.total.total}</span>
+        </Typography>
+        {/* clean sheet */}
+        <Typography variant="h4" component="h4" sx={headingText}>
+          Clean Sheet: <span style={spanText}>{clean_sheet.total}</span>
+        </Typography>
+        <Typography variant="h4" component="h4" sx={headingText}>
+          Penalty Rate:
+        </Typography>
+        {/* penalty scored */}
+        <BarContianer>
+          <PercentBar
+            percent={penalty.scored.percentage}
+            scored={penalty.scored.total}
+            missed={penalty.missed.total}
+            total={penalty.total}
+          />
+          {user && (
             <Button
               variant="outlined"
-              style={displayButton}
-              onClick={() => setShow("Goals")}
+              style={{
+                width: "50%",
+                height: 40,
+                backgroundColor: "#EEBC1D",
+                marginTop: 8,
+                fontFamily: "Russo One",
+              }}
+              onClick={inWatchList ? removeFromWatchlist : addToWatchlist}
             >
-              Goals
+              {inWatchList ? "Remove" : "Add"}
             </Button>
-            <Button
-              variant="outlined"
-              style={displayButton}
-              onClick={() => setShow("Formation")}
-            >
-              Formation
-            </Button>
-          </div>
-        </ChartContainer>
-      </LayoutContainer>
-    </>
+          )}
+        </BarContianer>
+      </Sidebar>
+
+      <ChartContainer>
+        {show === "Goals" && <TeamStats stats={stats} />}
+
+        {show === "Formation" && <Lineup lineups={stats.lineups} />}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            paddingBottom: "2rem",
+          }}
+        >
+          <Button
+            variant="outlined"
+            style={displayButton}
+            onClick={() => setShow("Goals")}
+          >
+            Goals
+          </Button>
+          <Button
+            variant="outlined"
+            style={displayButton}
+            onClick={() => setShow("Formation")}
+          >
+            Formation
+          </Button>
+        </div>
+      </ChartContainer>
+    </LayoutContainer>
   );
 };
 

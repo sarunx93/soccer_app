@@ -66,6 +66,10 @@
 .formation-text{
   margin-top: 0;
 }
+
+
+
+
 @media screen and (max-width: 992px) {
     .lineup{
     
@@ -73,6 +77,9 @@
     }
     .formation-text{
       margin-top: 8rem;
+    }
+    .bar-chart{
+      /* transform: scale(0.5); */
     }
     
   }

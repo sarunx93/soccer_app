@@ -38,6 +38,8 @@ const title = {
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: true,
+  aspectRatio: 1,
   plugins: {
     legend: {},
     title: {
