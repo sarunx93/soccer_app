@@ -39,8 +39,8 @@ const title = {
 
 let width = window.innerWidth;
 export const options = {
-  responsive: true,
-  // maintainAspectRatio: true,
+  // responsive: true,
+  maintainAspectRatio: true,
   aspectRatio: width > 992 ? 2 : 1,
   plugins: {
     legend: {},

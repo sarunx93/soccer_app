@@ -57,7 +57,7 @@ const BarContianer = styled("div")(({ theme }) => ({
   height: "100%",
   [theme.breakpoints.down("md")]: {
     width: "100%",
-    height: "100vh",
+    // height: "100vh",
     borderRight: "none",
     alignItems: "center",
   },
@@ -74,7 +74,7 @@ const ChartContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     padding: 0,
     margin: 0,
-    height: "auto",
+    // height: "auto",
     display: "flex",
     justifyContent: "flex-start",
     flexDirection: "column",
