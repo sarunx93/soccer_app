@@ -69,7 +69,11 @@
 
 
 
+.bar-chart{
+  width: 80%; 
+  height:auto;
 
+}
 @media screen and (max-width: 992px) {
     .lineup{
     
@@ -79,7 +83,8 @@
       margin-top: 8rem;
     }
     .bar-chart{
-      /* transform: scale(0.5); */
+      width:100%;
+      height:auto;
     }
     
   }

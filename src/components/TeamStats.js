@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { height } from "@mui/system";
 const minuteLabels = [
   "0-15 mins",
   "16-30 mins",
@@ -36,10 +37,11 @@ const title = {
   fontFamily: "Russo One",
 };
 
+let width = window.innerWidth;
 export const options = {
   responsive: true,
-  maintainAspectRatio: true,
-  aspectRatio: 1,
+  // maintainAspectRatio: true,
+  aspectRatio: width > 992 ? 2 : 1,
   plugins: {
     legend: {},
     title: {
@@ -65,7 +67,7 @@ const TeamStats = ({ stats }) => {
   );
 
   return (
-    <>
+    <div className="bar-chart">
       <Typography variant="h3" sx={title}>
         Goals by Minutes
       </Typography>
@@ -84,7 +86,7 @@ const TeamStats = ({ stats }) => {
           ],
         }}
       />
-    </>
+    </div>
   );
 };
 
