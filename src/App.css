@@ -2,7 +2,9 @@
   text-align: center;
   background: #EEF7EE;
 }
-
+a{
+  text-decoration: none;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,6 +44,17 @@
 .loading{
   height:100vh;
 }
+.link
+
+.social-icons{
+  display:'flex';
+  
+}
+.icon{
+  color:white;
+  margin-right:1.5rem;
+  font-size: 1.75rem;
+}
 
 .team-logo-table{
   height:30px;
@@ -72,20 +85,20 @@
 .bar-chart{
   width: 50%;
   padding:2rem; 
-  /* height:500px; */
+  height:auto;
 
-}
+} 
 @media screen and (max-width: 992px) {
     .lineup{
     
       transform: rotate(270deg) scale(0.5);
     }
     .formation-text{
-      margin-top: 8rem;
+      margin-top: 0;
     }
     .bar-chart{
       width:100%;
-      /* height:500px; */
+     margin-top:0;
       padding:0;
     }
     

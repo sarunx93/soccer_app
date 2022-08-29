@@ -12,7 +12,7 @@ import { setUser, setWatchList } from "./features/teamSlice";
 import { auth, db } from "./firebase";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import Alert from "./components/Alert";
-import UserSiderbar from "./components/UserSiderbar";
+import Footer from "./components/Footer";
 function App() {
   const dispatch = useDispatch();
   const { user, watchList } = useSelector((store) => store.team);
@@ -52,6 +52,7 @@ function App() {
           <Route path="/teams/:id/:league" element={<Teams />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
       <Alert />
     </div>
   );

@@ -39,7 +39,7 @@ const title = {
 
 let width = window.innerWidth;
 export const options = {
-  // responsive: true,
+  responsive: true,
   maintainAspectRatio: true,
   aspectRatio: width > 992 ? 2 : 1,
   plugins: {
@@ -67,26 +67,27 @@ const TeamStats = ({ stats }) => {
   );
 
   return (
-    <div className="bar-chart">
-      <Typography variant="h3" sx={title}>
-        Goals by Minutes
-      </Typography>
-
-      <Bar
-        options={options}
-        data={{
-          labels: minuteLabels,
-          datasets: [
-            { label: "GF", data: goalFor, backgroundColor: "green" },
-            {
-              label: "GA",
-              data: goalAgainst,
-              backgroundColor: "red",
-            },
-          ],
-        }}
-      />
-    </div>
+    <>
+      <div className="bar-chart">
+        <Typography variant="h3" sx={title}>
+          Goals by Minutes
+        </Typography>
+        <Bar
+          options={options}
+          data={{
+            labels: minuteLabels,
+            datasets: [
+              { label: "GF", data: goalFor, backgroundColor: "green" },
+              {
+                label: "GA",
+                data: goalAgainst,
+                backgroundColor: "red",
+              },
+            ],
+          }}
+        />
+      </div>
+    </>
   );
 };
 

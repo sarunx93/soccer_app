@@ -22,9 +22,9 @@ import { doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 
 const LayoutContainer = styled("div")(({ theme }) => ({
-  height: "100vh",
+  height: "100%",
   background: "#EEF7EE",
-  // width: "auto",
+  width: "auto",
   display: "flex",
   [theme.breakpoints.down("xl")]: {
     flexDirection: "column",
@@ -37,24 +37,29 @@ const LayoutContainer = styled("div")(({ theme }) => ({
 
 const Sidebar = styled("div")(({ theme }) => ({
   width: "25%",
-  height: "100%",
+  height: "100vh",
   [theme.breakpoints.down("md")]: {
     width: "100%",
     // height: "90vh",
     borderRight: "none",
     alignItems: "center",
+    padding: 0,
+  },
+  [theme.breakpoints.down("xl")]: {
+    borderRight: "none",
+    padding: 0,
   },
   display: "flex",
   flexDirection: "column",
   alignItems: "left",
   justifyContent: "center",
-  padding: "2rem",
-
+  paddingLeft: "2rem",
+  paddingRight: "2rem",
   borderRight: "2px solid grey",
 }));
 
 const BarContianer = styled("div")(({ theme }) => ({
-  height: "100%",
+  // height: "100%",
   [theme.breakpoints.down("md")]: {
     width: "100%",
     // height: "100vh",
@@ -109,7 +114,6 @@ const Teams = () => {
   let { watchList } = useSelector((store) => store.team);
   const [show, setShow] = useState("Goals");
   const addToWatchlist = async () => {
-    //team[0].team.id
     const teamRef = doc(db, "watchList", user.uid);
     try {
       await setDoc(teamRef, {
@@ -133,7 +137,6 @@ const Teams = () => {
     }
   };
   const removeFromWatchlist = async () => {
-    //team[0].team.id
     const teamRef = doc(db, "watchList", user.uid);
     try {
       await setDoc(teamRef, {
@@ -178,7 +181,7 @@ const Teams = () => {
   const inWatchList = watchList
     ?.map((list) => list.name)
     .includes(team[0].team.name);
-  console.log(penalty);
+
   return (
     <LayoutContainer>
       <Sidebar>

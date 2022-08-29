@@ -6,12 +6,14 @@ import { makeStyles } from "@mui/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Typography } from "@mui/material";
 import { signOut, GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
+import { createTheme } from "@mui/material/styles";
 import { auth, db } from "../firebase";
 import { handleAlert } from "../features/teamSlice";
 import { doc, setDoc } from "firebase/firestore";
 import { handleTeamChange } from "../features/teamSlice";
 import { handleLeagueChange } from "../features/leagueSlice";
 import { useParams, Link, useNavigate } from "react-router-dom";
+const theme = createTheme({});
 const useStyles = makeStyles({
   container: {
     width: 350,
@@ -20,7 +22,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     fontFamily: "Montserrat",
+    [theme.breakpoints.down("md")]: {
+      width: 275,
+    },
   },
+
   profile: {
     flex: 1,
     display: "flex",
@@ -151,23 +157,44 @@ const UserSiderbar = () => {
             <span
               style={{
                 width: "100%",
-                fontSize: 25,
+                fontSize: 20,
+                fontFamily: "Russo One",
                 textAlign: "center",
                 fontWeight: "bolder",
-                wordWrap: "break-word",
+                // wordWrap: "break-word",
               }}
             >
               {user.displayname || user.email}
             </span>
             <div className={classes.watchlist}>
-              <span style={{ fontSize: 15, textShadow: "0 0 5px black" }}>
+              <span
+                style={{ fontSize: 18, color: "white", fontFamily: "Mitr" }}
+              >
                 {watchList.map((list) => {
                   return (
-                    <div style={{ display: "flex" }}>
-                      <Typography>{list.name}</Typography>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "Mitr",
+                          marginRight: "1rem",
+                          fontSize: 20,
+                        }}
+                      >
+                        {list.name}
+                      </Typography>
 
                       <span
-                        style={{ cursor: "pointer" }}
+                        style={{
+                          cursor: "pointer",
+                          textAlign: "right",
+                          fontWeight: "100",
+                          color: "#F5E2A0",
+                        }}
                         onClick={() => removeFromWatchlist(list)}
                       >
                         delete
@@ -185,8 +212,10 @@ const UserSiderbar = () => {
             style={{
               height: "8%",
               width: "100%",
-              backgroundColor: "gold",
+              backgroundColor: "#EEBC1D",
               marginTop: 20,
+              fontFamily: "Russo One",
+              color: "#3C84C8",
             }}
           >
             Log Out
