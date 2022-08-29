@@ -85,7 +85,7 @@ a{
 .bar-chart{
   width: 50%;
   padding:2rem; 
-  height:auto;
+  
 
 } 
 @media screen and (max-width: 992px) {
