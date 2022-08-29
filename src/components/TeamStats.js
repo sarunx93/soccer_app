@@ -37,7 +37,6 @@ const title = {
   fontFamily: "Russo One",
 };
 
-let width = window.innerWidth;
 export const options = {
   responsive: true,
   maintainAspectRatio: true,
@@ -54,6 +53,7 @@ export const options = {
 };
 
 const TeamStats = ({ stats }) => {
+  const { thisSeason } = useSelector((store) => store.league);
   //GF
   const preGoalsFor = Array.from(Object.values(stats.goals.for.minute));
   const goalFor = preGoalsFor.map((goal) =>
@@ -71,6 +71,9 @@ const TeamStats = ({ stats }) => {
       <div className="bar-chart">
         <Typography variant="h3" sx={title}>
           Goals by Minutes
+        </Typography>
+        <Typography variant="h3" sx={title}>
+          in season {thisSeason}
         </Typography>
         <Bar
           options={options}
