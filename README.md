@@ -25,3 +25,5 @@ After clicking a teame you will be shown with the team stats on the left, and go
 <img src="https://raw.githubusercontent.com/sarunx93/soccer_app/main/public/formation.png"/>
 
 Finally, in a team page, you can add your favourite teams to your watch list and make sure you don't miss out by simply clicking the add button. Google Firebase is responsible for storing you precious watch list.
+
+<img src="https://raw.githubusercontent.com/sarunx93/soccer_app/main/public/watchlist.png"/>
