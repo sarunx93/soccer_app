@@ -1,13 +1,13 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { FaAlignLeft, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 const LayoutContainer = styled("div")(({ theme }) => ({
   display: "block",
   alignItems: "center",
   justifyContent: "center",
   width: "100%",
-  height: "80px",
+
   background: "black",
   height: "auto",
   padding: "0.25rem",
@@ -32,14 +32,16 @@ const Footer = () => {
             href="https://www.linkedin.com/in/sarun-p/"
             target="_blank"
             className="icon"
+            rel="noreferrer"
           >
             <FaLinkedin />
           </a>
 
           <a
-            href="https://www.linkedin.com/in/sarun-p/"
+            href="https://github.com/sarunx93"
             target="_blank"
             className="icon"
+            rel="noreferrer"
           >
             <FaGithub />
           </a>
@@ -57,6 +59,7 @@ const Footer = () => {
             href="https://rapidapi.com/api-sports/api/api-football/"
             target="_blank"
             style={{ color: "white", fontFamily: "Mitr" }}
+            rel="noreferrer"
           >
             API-FOOTBALL
           </a>
