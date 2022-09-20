@@ -6,7 +6,7 @@ After cloning this repo in to your machine, navigate to the root directory and r
 npm install
 ```
 to install the packages. 
-However, if any packages can not be installed due to version mismatched, you may try install them one by one and put the flag
+However, if any packages can not be installed due to version mismatch, you may try install them one by one and put the flag
 
 ```
 --legacy-peer-deps
